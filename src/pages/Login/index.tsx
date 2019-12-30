@@ -15,25 +15,7 @@ const Login: FC = (props: any) => {
       async (err: [], values: { email: string; password: string }) => {
         if (!err) {
           try {
-            const {
-              data: {
-                data: { access_key }
-              }
-            } = await api.post(
-              "auth/session-register",
-              {
-                organization_user: {
-                  email: values.email,
-                  password: values.password
-                }
-              },
-              {
-                headers: {
-                  Authorization: "Bearer " + token
-                }
-              }
-            );
-            localStorage.setItem("token", access_key);
+            await registerSession(values);
             history.push("home");
           } catch (err) {
             openNotificationWithIcon();
@@ -43,15 +25,32 @@ const Login: FC = (props: any) => {
     );
   };
 
-  const openNotificationWithIcon = () => {
-    console.log(notification);
-    notification["error"]({
-      message: "ERROR!!!",
-      description: "Please check your email or password are correct."
-    });
+  const registerSession = async (values: {
+    email: string;
+    password: string;
+  }) => {
+    const {
+      data: {
+        data: { access_key }
+      }
+    } = await api.post(
+      "auth/session-register",
+      {
+        organization_user: {
+          email: values.email,
+          password: values.password
+        }
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      }
+    );
+    localStorage.setItem("token", access_key);
   };
 
-  const firstRequest = async () => {
+  const requestSessionToken = async () => {
     const {
       data: {
         data: { access_key }
@@ -62,8 +61,15 @@ const Login: FC = (props: any) => {
     setToken(access_key);
   };
 
+  const openNotificationWithIcon = () => {
+    notification["error"]({
+      message: "ERROR!!!",
+      description: "Please check your email or password are correct."
+    });
+  };
+
   useEffect(() => {
-    firstRequest();
+    requestSessionToken();
   }, []);
 
   const { getFieldDecorator } = props.form;
