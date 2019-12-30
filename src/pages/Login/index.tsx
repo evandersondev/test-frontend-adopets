@@ -18,7 +18,7 @@ const Login: FC = (props: any) => {
             await registerSession(values);
             history.push("home");
           } catch (err) {
-            openNotificationWithIcon();
+            showNotification();
           }
         }
       }
@@ -61,14 +61,21 @@ const Login: FC = (props: any) => {
     setToken(access_key);
   };
 
-  const openNotificationWithIcon = () => {
+  const showNotification = () => {
     notification["error"]({
       message: "ERROR!!!",
       description: "Please check your email or password are correct."
     });
   };
 
+  const tokenExists = () => {
+    const token = !!localStorage.getItem("token");
+
+    return token ? history.push("/home") : history.push("/");
+  };
+
   useEffect(() => {
+    tokenExists();
     requestSessionToken();
   }, []);
 
