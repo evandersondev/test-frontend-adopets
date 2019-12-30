@@ -78,7 +78,7 @@ const Login: FC = (props: any) => {
     <Container>
       <section>
         <h1>
-          Wellcome to <span>adopets</span>
+          Welcome to <span>adopets</span>
         </h1>
         <Form
           data-testid={"form-submit"}

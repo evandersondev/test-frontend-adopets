@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import api from "../../services/api";
 
-import { columns } from "./main";
-
 import { Table } from "antd";
 import { Container } from "./styles.js";
 
@@ -22,6 +20,11 @@ const Home: FC = () => {
 
   const fetchPets = async (options?: Object, filters?: Object) => {
     setIsLoading(true);
+    searchPets(options, filters);
+    setIsLoading(false);
+  };
+
+  const searchPets = async (options?: Object, filters?: Object) => {
     const {
       data: {
         data: { count, limit, page, result }
@@ -97,18 +100,17 @@ const Home: FC = () => {
       pageSize: limit,
       current: page
     });
-
-    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchPets();
-  }, []);
+  });
 
   const handleTableChange = (pagination: any, filters: any, sorter: any) => {
     const searchFilters: any = {};
     Object.keys(filters).map((key: string) => {
       searchFilters[key] = filters[key][0];
+      return "";
     });
     const pager = { ...page };
     pager.current = pagination.current;
@@ -125,6 +127,53 @@ const Home: FC = () => {
       searchFilters
     );
   };
+
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "id"
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      sorter: true
+    },
+    {
+      title: "Size",
+      dataIndex: "size_key",
+      filterMultiple: false,
+      filters: [
+        { text: "Small", value: "S" },
+        { text: "Medio", value: "M" },
+        { text: "Large", value: "L" },
+        { text: "Extra Large", value: "XL" }
+      ]
+    },
+    {
+      title: "Age",
+      dataIndex: "age_key",
+      filterMultiple: false,
+      filters: [
+        { text: "Baby", value: "BABY" },
+        { text: "Young", value: "YOUNG" },
+        { text: "Adult", value: "ADULT" },
+        { text: "Senior", value: "SENIOR" }
+      ]
+    },
+    {
+      title: "Sex",
+      dataIndex: "sex_key",
+      filterMultiple: false,
+      filters: [
+        { text: "Male", value: "MALE" },
+        { text: "Female", value: "FEMALE" }
+      ]
+    },
+    {
+      title: "Price",
+      dataIndex: "price"
+    }
+  ];
 
   const handleLogout = () => {
     localStorage.removeItem("token");
