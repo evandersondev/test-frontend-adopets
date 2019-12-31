@@ -10,7 +10,7 @@ interface Pet {
   sex_key: string;
   size_key: string;
   age_key: string;
-  price: number;
+  price: string;
 }
 
 const Home: FC = () => {
@@ -19,9 +19,9 @@ const Home: FC = () => {
   const [page, setPage] = useState<any>();
 
   const fetchPets = async (options?: Object, filters?: Object) => {
-    setIsLoading(true);
-    searchPets(options, filters);
-    setIsLoading(false);
+    await setIsLoading(true);
+    await searchPets(options, filters);
+    await setIsLoading(false);
   };
 
   const searchPets = async (options?: Object, filters?: Object) => {
@@ -81,7 +81,7 @@ const Home: FC = () => {
       }
     );
 
-    setPets(
+    await setPets(
       result.map(
         (pet: any) =>
           ({
@@ -95,7 +95,7 @@ const Home: FC = () => {
       )
     );
 
-    setPage({
+    await setPage({
       total: count,
       pageSize: limit,
       current: page
@@ -104,7 +104,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     fetchPets();
-  });
+  }, []);
 
   const handleTableChange = (pagination: any, filters: any, sorter: any) => {
     const searchFilters: any = {};
@@ -124,6 +124,7 @@ const Home: FC = () => {
             ? []
             : [sorter.order === "descend" ? "-" + sorter.field : sorter.field]
       },
+
       searchFilters
     );
   };
@@ -194,7 +195,6 @@ const Home: FC = () => {
           pagination={page}
           loading={isLoading}
           onChange={handleTableChange}
-          data-testid={"table-pets"}
         />
       </section>
       <br />

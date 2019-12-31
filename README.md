@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-  <img src="./public/screen-layout.png" alt="YOUR_PROJECT_NAME" width="1280">
+  <img src="./public/screen-layout.png" alt="YOUR_PROJECT_NAME" width="100%">
 <br>
 <br>
 TEST FRONTEND - ADOPETS

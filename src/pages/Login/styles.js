@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  @import url("https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap");
+
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -20,6 +22,7 @@ export const Container = styled.div`
     h1 {
       font-size: 2em;
       margin-bottom: 30px;
+      font-family: "Quicksand", sans-serif;
 
       span {
         color: #cf3e71;
