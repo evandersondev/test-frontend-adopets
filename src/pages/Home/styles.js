@@ -68,7 +68,7 @@ export const Container = styled.div`
     border-radius: 5px;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     section {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;

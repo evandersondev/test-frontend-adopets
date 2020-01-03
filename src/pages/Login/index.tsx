@@ -87,11 +87,7 @@ const Login: FC = (props: any) => {
         <h1>
           Welcome to <span>adopets </span>
         </h1>
-        <Form
-          data-testid={"form-submit"}
-          onSubmit={handleSubmit}
-          className="login-form"
-        >
+        <Form data-testid={"form-submit"} onSubmit={handleSubmit}>
           <Form.Item>
             {getFieldDecorator("email", {
               rules: [{ required: true, message: "Please input your email!" }]

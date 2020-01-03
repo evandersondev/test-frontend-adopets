@@ -11,6 +11,7 @@ interface Pet {
   size_key: string;
   age_key: string;
   price: string;
+  breed_primary: string;
 }
 
 const Home: FC = () => {
@@ -69,7 +70,7 @@ const Home: FC = () => {
         },
         options: {
           page: 1,
-          limit: 5,
+          limit: 8,
           sort: [],
           ...options
         }
@@ -90,7 +91,8 @@ const Home: FC = () => {
             sex_key: pet.sex_key,
             size_key: pet.size_key,
             age_key: pet.age_key,
-            price: pet.price
+            price: pet.price,
+            breed_primary: pet.breed_primary.name
           } as Pet)
       )
     );
@@ -171,6 +173,10 @@ const Home: FC = () => {
       ]
     },
     {
+      title: "Breed",
+      dataIndex: "breed_primary"
+    },
+    {
       title: "Price",
       dataIndex: "price"
     }
@@ -195,6 +201,7 @@ const Home: FC = () => {
           pagination={page}
           loading={isLoading}
           onChange={handleTableChange}
+          data-testid="table-home"
         />
       </section>
       <br />

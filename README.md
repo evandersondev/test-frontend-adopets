@@ -22,7 +22,13 @@ TEST FRONTEND - ADOPETS
 
 ## Getting started
 
-In Building...
+Make download this repository `git clone https://github.com/evansCodes/test-frontend-adopets.git`
+
+- install dependencies
+  yarn or npm insyall
+
+* serve with hot reload at localhost:3000
+  \$ yarn start or npm start
 
 ## License
 
