@@ -7,6 +7,7 @@ import { Container } from "./styles";
 
 const Login: FC = (props: any) => {
   const [token, setToken] = useState<string>("");
+  const key: string = "505763d6-4202-4b05-9efc-93b366939bcf";
 
   const requestSessionToken = async () => {
     const {
@@ -14,7 +15,7 @@ const Login: FC = (props: any) => {
         data: { access_key }
       }
     } = await api.post("auth/session-request", {
-      system_api_key: localStorage.getItem("key")
+      system_api_key: key
     });
     setToken(access_key);
   };
@@ -68,7 +69,6 @@ const Login: FC = (props: any) => {
 
   useEffect(() => {
     tokenExists();
-    localStorage.setItem("key", "505763d6-4202-4b05-9efc-93b366939bcf");
     requestSessionToken();
   }, []);
 
