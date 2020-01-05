@@ -27,8 +27,9 @@ Make download this repository `git clone https://github.com/evansCodes/test-fron
 - install dependencies
   yarn or npm insyall
 
-* serve with hot reload at localhost:3000
-  \$ yarn start or npm start
+- serve with hot reload at localhost:3000
+
+- yarn start or npm start
 
 ## License
 
